@@ -1,0 +1,18 @@
+#!/bin/bash
+
+get_current_window_id() {
+	i3-msg -t get_tree \
+		| grep -o '{[^{]*"focused":true[^}]*}' \
+		| sed 's/.*"id":\([^,]*\),.*/\1/'
+}
+
+remind() {
+	TARGET_WINDOW="${1}"
+	shift
+	eval "${@}"
+	i3-nagbar -m "${@}" -b "Go" "i3-msg [con_id=\"${TARGET_WINDOW}\"] focus" >/dev/null 2>&1 &
+}
+
+if [ "${BASH_SOURCE}" = "${0}" ]; then
+	remind "$(get_current_window_id)" "${@}"
+fi
