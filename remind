@@ -14,7 +14,7 @@ remind() {
 	TARGET_WINDOW="${1}"
 	shift
 	eval "${@}"
-	i3-nagbar -m "${*}" -b "Go" "i3-msg [con_id=\"${TARGET_WINDOW}\"] focus" >/dev/null 2>&1 &
+	i3-nagbar -m "[${?}] ${*}" -b "Go" "i3-msg [con_id=\"${TARGET_WINDOW}\"] focus" >/dev/null 2>&1 &
 	echo -e "\a"
 }
 
