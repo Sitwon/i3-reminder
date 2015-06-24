@@ -15,6 +15,7 @@ remind() {
 	shift
 	eval "${@}"
 	i3-nagbar -m "${*}" -b "Go" "i3-msg [con_id=\"${TARGET_WINDOW}\"] focus" >/dev/null 2>&1 &
+	echo -e "\a"
 }
 
 if [ "${BASH_SOURCE}" = "${0}" ]; then
